@@ -57,9 +57,11 @@ data RenderS db r = RenderS {
   , getValues :: [PersistValue] -> [PersistValue]
 }
 
+instance Semigroup Utf8 where
+  (Utf8 a) <> (Utf8 b) = Utf8 (a <> b)
+
 instance Monoid Utf8 where
   mempty = Utf8 mempty
-  mappend (Utf8 a) (Utf8 b) = Utf8 (mappend a b)
 
 instance IsString Utf8 where
   fromString = Utf8 . B.fromString
